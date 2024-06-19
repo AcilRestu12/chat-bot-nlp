@@ -92,7 +92,8 @@ model = NeuralNet(input_size, hidden_size, output_size).to(device)
 # Loss & optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-    
+
+# Training model
 for epoch in range(num_epochs):
     for (words, labels) in train_loader:
         words = words.to(device)
@@ -106,9 +107,26 @@ for epoch in range(num_epochs):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-        
+    
+    # Print loss per 100 epoch
     if (epoch + 1) % 100 == 0:
         print(f'epoch : {epoch+1}/{num_epochs}, loss={loss.item():.4f}')
-        
+
+# Print final loss when training done
 print(f'final loss, loss={loss.item():.4f}')
+
+# Save data
+data = {
+    'model_state' : model.state_dict(),
+    'input_size' : input_size,
+    'output_size' : output_size,
+    'hidden_size' : hidden_size,
+    'all_words' : all_words,
+    'tags' : tags,
+}
+
+# Save file of data
+FILE = 'data.pth'
+torch.save(data, FILE)
+print(f'Training complete. file saved to {FILE}')
 
