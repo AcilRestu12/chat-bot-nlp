@@ -5,7 +5,7 @@ from nltk_utils import tokenize, stem, bag_of_words
 from model import create_model
 
 # Open file json
-with open('intents.json', 'r') as f:
+with open('tensorflow/intents.json', 'r') as f:
     intents = json.load(f)
 
 # Define lists
@@ -61,7 +61,7 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate),
 model.fit(x_train, y_train, epochs=num_epochs, batch_size=batch_size, verbose=1)
 
 # Save model and metadata
-model.save('chat_model.h5')
+model.save('tensorflow/chat_model.h5')
 metadata = {
     'input_size': input_size,
     'output_size': output_size,
@@ -69,6 +69,6 @@ metadata = {
     'all_words': all_words,
     'tags': tags,
 }
-with open('metadata.json', 'w') as f:
+with open('tensorflow/metadata.json', 'w') as f:
     json.dump(metadata, f)
 print('Training complete. Model and metadata saved.')

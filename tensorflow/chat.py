@@ -6,8 +6,8 @@ from nltk_utils import bag_of_words, tokenize
 from keras.models import load_model
 
 # Load model and metadata
-model = load_model('chat_model.h5')
-with open('metadata.json', 'r') as f:
+model = load_model('tensorflow/chat_model.h5')
+with open('tensorflow/metadata.json', 'r') as f:
     metadata = json.load(f)
 
 input_size = metadata['input_size']
@@ -15,7 +15,7 @@ all_words = metadata['all_words']
 tags = metadata['tags']
 
 # Open file json
-with open('intents.json', 'r') as f:
+with open('tensorflow/intents.json', 'r') as f:
     intents = json.load(f)
 
 # Chatbot loop

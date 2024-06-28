@@ -9,7 +9,7 @@ from nltk_utils import tokenize, stem, bag_of_words
 from model import NeuralNet
 
 # Open file json
-with open('intents.json', 'r') as f:
+with open('torch/intents.json', 'r') as f:
     intents = json.load(f)
     
 # Define list
@@ -126,7 +126,7 @@ data = {
 }
 
 # Save file of data
-FILE = 'data.pth'
+FILE = 'torch/data.pth'
 torch.save(data, FILE)
 print(f'Training complete. file saved to {FILE}')
 

@@ -9,11 +9,11 @@ from nltk_utils import bag_of_words, tokenize
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Open file json
-with open('intents.json', 'r') as f:
+with open('torch/intents.json', 'r') as f:
     intents = json.load(f)
 
 # Load file data of result training
-FILE = 'data.pth'
+FILE = 'torch/data.pth'
 data = torch.load(FILE)
 
 # Taking the parameter from data

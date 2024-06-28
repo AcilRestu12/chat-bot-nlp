@@ -8,8 +8,8 @@ from nltk_utils import bag_of_words, tokenize
 from keras.models import load_model
 
 # Load model and metadata
-model = load_model('chat_model.h5')
-with open('metadata.json', 'r') as f:
+model = load_model('tensorflow/chat_model.h5')
+with open('tensorflow/metadata.json', 'r') as f:
     metadata = json.load(f)
 
 input_size = metadata['input_size']
@@ -22,11 +22,11 @@ label_encoder = LabelEncoder()
 label_encoder.classes_ = np.array(label_encoder_classes)
 
 # Open file json
-with open('intents.json', 'r') as f:
+with open('tensorflow/intents.json', 'r') as f:
     intents = json.load(f)
 
 # Chatbot loop
-bot_name = 'Tensor'
+bot_name = '(Old) Tensor'
 print("Let's chat! Type 'quit' to exit")
 
 while True:
@@ -45,11 +45,12 @@ while True:
     probs = tf.nn.softmax(output[0])
     prob = probs[predicted[0]]
     
-    threshold = 0.75
+    threshold = 0.25
+    print(f'prob : {prob}')
     if prob > threshold:
         for intent in intents['intents']:
             if tag == intent['tag']:
                 response = random.choice(intent['responses'])
-                print(f"{bot_name}: {response}")
+                print(f"{bot_name}: {response}\n")
     else:
-        print(f"{bot_name}: I do not understand...")
+        print(f"{bot_name}: I do not understand...\n")
