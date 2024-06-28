@@ -92,7 +92,7 @@ model = NeuralNet(input_size, hidden_size, output_size).to(device)
 # Loss & optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
+    
 # Training model
 for epoch in range(num_epochs):
     for (words, labels) in train_loader:
